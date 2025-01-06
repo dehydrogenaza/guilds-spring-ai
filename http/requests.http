@@ -1,0 +1,11 @@
+### Maintenance question
+POST http://localhost:8080/api/assistant
+Accept: text/plain
+Content-Type: application/json
+
+{
+  "model": "M4A3",
+  "question": "How to start the tank?"
+}
+
+###

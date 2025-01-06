@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: guilds-ai
+  threads:
+    virtual:
+      enabled: true
+  ai:
+    openai:
+      chat:
+        options:
+          model: gpt-4o-mini
