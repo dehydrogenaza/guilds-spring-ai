@@ -1,6 +1,6 @@
 package com.softwaremind.guildsai.assistant;
 
-import com.softwaremind.guildsai.controller.TankQuestionRequest;
+import com.softwaremind.guildsai.endpoints.TankQuestionRequest;
 import com.softwaremind.guildsai.manual.ManualReader;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.vectorstore.VectorStore;

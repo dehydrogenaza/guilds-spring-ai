@@ -1,4 +1,4 @@
-package com.softwaremind.guildsai.controller;
+package com.softwaremind.guildsai.endpoints;
 
 import com.softwaremind.guildsai.assistant.TankAssistant;
 import lombok.RequiredArgsConstructor;

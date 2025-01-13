@@ -27,13 +27,10 @@ repositories {
 extra["springAiVersion"] = "1.0.0-M4"
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.ai:spring-ai-openai-spring-boot-starter")
     implementation("org.springframework.ai:spring-ai-pdf-document-reader")
 //    implementation("org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter")
-//    implementation("org.springframework.ai:spring-ai-vectorstore")
-//    implementation("org.springframework.ai:spring-ai-openai")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
     annotationProcessor("org.projectlombok:lombok")
