@@ -10,8 +10,8 @@ import java.util.List;
 
 @Service
 public class ManualReader {
-    public List<Document> getDocsFromPdf() {
-        PagePdfDocumentReader pdfReader = new PagePdfDocumentReader("classpath:/M4A3MediumTankTechnicalManual.pdf",
+    public List<Document> getDocsFromPdf(String pdfName) {
+        PagePdfDocumentReader pdfReader = new PagePdfDocumentReader("classpath:/" + pdfName,
                 PdfDocumentReaderConfig.builder()
                         .withPageTopMargin(0)
                         .withPageExtractedTextFormatter(ExtractedTextFormatter.builder()

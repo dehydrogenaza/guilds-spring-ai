@@ -8,4 +8,34 @@ Content-Type: application/json
   "question": "How to start the tank?"
 }
 
+### Initialize the vector store
+POST http://localhost:8080/api/manual
+Accept: text/plain
+Content-Type: application/json
+
+{
+  "model": "M4A3",
+  "pdf": "M4A3MediumTankTechnicalManual.pdf"
+}
+
+### Book tanking lessons
+POST http://localhost:8080/api/assistant
+Accept: text/plain
+Content-Type: application/json
+
+{
+  "model": "M4A3",
+  "question": "I'd like to book a tank driving lesson near Cracow."
+}
+
+### Book tanking lessons for tomorrow
+POST http://localhost:8080/api/assistant
+Accept: text/plain
+Content-Type: application/json
+
+{
+  "model": "M4A3",
+  "question": "I'd like to book a tank driving lesson near Cracow for tomorrow."
+}
+
 ###

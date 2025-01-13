@@ -9,3 +9,9 @@ spring:
       chat:
         options:
           model: gpt-4o-mini
+          functions:
+            - LessonSlotsNearCity
+            - CurrentDateTime
+      embedding:
+        options:
+          model: text-embedding-3-small
