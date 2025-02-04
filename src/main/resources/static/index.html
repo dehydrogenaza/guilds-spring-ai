@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <h1>Tank Assistant</h1>
+    <form id="assistantForm">
+      <label>
+        Model:
+        <input id="model" name="model" value="M4A3">
+      </label>
+      <label>
+        Question:
+        <input size="50" id="question" name="question" value="I'd like to book a tank driving lesson near Cracow.">
+      </label>
+      <button type="submit">Ask</button>
+    </form>
+
+    <h2>Answer:</h2>
+    <pre id="output"></pre>
+
+    <script>
+      document.getElementById('assistantForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const outputEl = document.getElementById('output');
+        outputEl.textContent = ''; // Clear previous output
+
+        // Collect form data.
+        const model = document.getElementById('model').value;
+        const question = document.getElementById('question').value;
+
+        // Make the POST request with JSON body.
+        fetch('/api/assistant', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({model, question})
+        })
+            .then(response => {
+              if (!response.body) {
+                throw new Error("ReadableStream not supported in this browser.");
+              }
+
+              const reader = response.body.getReader();
+              const decoder = new TextDecoder();
+              let buffer = ''; // Holds partial data between chunks
+
+              // Function to process each chunk from the stream.
+              function processChunk({done, value}) {
+                if (done) {
+                  console.log("Stream complete.");
+                  return;
+                }
+                // Decode the current chunk.
+                const chunk = decoder.decode(value, {stream: true});
+                buffer += chunk;
+
+                // SSE messages are separated by double newlines.
+                const events = buffer.split("\n\n");
+                // The last element may be incomplete, so keep it in the buffer.
+                buffer = events.pop();
+
+                events.forEach(eventStr => {
+                  const data = eventStr.replaceAll('data:', '');
+                  outputEl.textContent += data;
+                });
+
+                // Continue reading the stream.
+                reader.read().then(processChunk);
+              }
+
+              // Start reading the stream.
+              reader.read().then(processChunk);
+            })
+            .catch(error => {
+              console.error("Error with fetch:", error);
+            });
+      });
+    </script>
+  </body>
+</html>

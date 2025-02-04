@@ -13,17 +13,17 @@ public class LessonSlotsNearCity implements Function<LessonSlotsNearCity.Request
 
   private static final List<Lesson> MOCK_LESSONS_NEAR_CRACOW = List.of(
       new Lesson(
-          LocalDateTime.of(2025, 1, 15, 6, 0),
+          LocalDateTime.of(2025, 2, 4, 6, 0),
           "Dawid",
           "Kraków"
       ),
       new Lesson(
-          LocalDateTime.of(2025, 1, 16, 18, 30),
+          LocalDateTime.of(2025, 2, 5, 18, 30),
           "Piotr",
           "Dąbrowa Górnicza"
       ),
       new Lesson(
-          LocalDateTime.of(2025, 1, 16, 20, 15),
+          LocalDateTime.of(2025, 2, 5, 20, 15),
           "Weronika",
           "Kraków"
       )
@@ -31,7 +31,7 @@ public class LessonSlotsNearCity implements Function<LessonSlotsNearCity.Request
 
   private static final List<Lesson> MOCK_LESSONS_NEAR_WARSAW = List.of(
       new Lesson(
-          LocalDateTime.of(2025, 1, 17, 10, 45),
+          LocalDateTime.of(2025, 2, 6, 10, 45),
           "Bartek",
           "Pruszków"
       )

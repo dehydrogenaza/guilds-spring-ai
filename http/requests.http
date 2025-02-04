@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ### Book tanking lessons
 POST http://localhost:8080/api/assistant
-Accept: text/plain
+Accept: text/event-stream
 Content-Type: application/json
 
 {
@@ -35,7 +35,17 @@ Content-Type: application/json
 
 {
   "model": "M4A3",
-  "question": "I'd like to book a tank driving lesson near Cracow for tomorrow."
+  "question": "I'd like to book a tank driving lesson near Kraków for tomorrow."
+}
+
+### Drive a tank from Kraków
+POST http://localhost:8080/api/assistant
+Accept: text/plain
+Content-Type: application/json
+
+{
+  "model": "M4A3",
+  "question": "I'd like to book a tank driving lesson in Kraków. What are the key things I need to remember when driving?"
 }
 
 ###

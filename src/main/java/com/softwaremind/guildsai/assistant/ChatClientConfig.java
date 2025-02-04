@@ -1,5 +1,6 @@
 package com.softwaremind.guildsai.assistant;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.ai.chat.client.ChatClient;
@@ -22,8 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ChatClientConfig {
   private static final String SYSTEM_MSG = """
-      You are an expert Armored Division mechanic who works in a Tank Driving school.
-      Answer questions about proper tank operating procedures and maintenance according to Army regulations, and help train new tank drivers.
+      You are an expert Armored Division instructor who works in a Tank Driving school.
+      Answer questions about proper tank operating procedures, maintenance and driving skills according to Army regulations, and help train new tank drivers.
       Help the trainees find tank driving lessons that suit their needs.
       Your answers should be detailed and accurate.
       """;
@@ -38,7 +39,7 @@ public class ChatClientConfig {
         .defaultSystem(SYSTEM_MSG)
         .defaultOptions(defaultConfig)
         .defaultAdvisors(defaultAdvisor)
-        .defaultFunctions("LessonSlotsNearCity", "CurrentDateTime", "LessonDiscount")
+        .defaultFunctions("LessonSlotsNearCity", "CurrentDateTime")
         .build();
   }
 
@@ -56,7 +57,7 @@ public class ChatClientConfig {
   @Bean
   public FunctionCallback lessonSlotsNearCity() {
     return FunctionCallback.builder()
-        .description("Get the list of all available tank driving lesson slots near a given city.")
+        .description("Returns the list of all available tank driving lesson slots near a given city. Use it to find lessons in a specific location, as well as to suggest alternatives in nearby cities.")
         .function("LessonSlotsNearCity", new LessonSlotsNearCity())
         .inputType(LessonSlotsNearCity.Request.class)
         .build();
@@ -65,10 +66,11 @@ public class ChatClientConfig {
   @Bean
   public FunctionCallback currentDateTime() {
     return FunctionCallback.builder()
-        .description("Get the current date and time.")
+        .description("Returns the current date and time (TODAY). Use it to find the user's current date/time in order to provide answers related to the current time (i.e. if the user asks about the next available lesson, or a lesson 'today', or '2 days from now').")
         .function("CurrentDateTime", () -> {
-          log.info("Returning current date and time");
-          return LocalDateTime.now();
+          var currentDateTime = LocalDateTime.now();
+          log.info("Returning current date and time: {}", currentDateTime);
+          return currentDateTime;
         })
         .inputType(Void.class)
         .build();
